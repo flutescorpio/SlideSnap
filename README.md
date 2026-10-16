@@ -4,7 +4,7 @@
 
 <p align="center">
 Photos of lecture slides → straight, clean slides + their text as Markdown.<br>
-A small macOS app (Apple silicon). Everything runs on your Mac: no accounts, no cloud, no API keys.
+A small macOS app for Apple silicon and Intel Macs. Everything runs on your Mac: no accounts, no cloud, no API keys.
 </p>
 
 <p align="center"><a href="#по-русски">По-русски ↓</a></p>
