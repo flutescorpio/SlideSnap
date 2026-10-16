@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build app
+        run: ./scripts/build-app.sh
+      - name: Smoke test CLI
+        run: |
+          dist/SlideSnap.app/Contents/Helpers/slidesnap --help
+          lipo -archs dist/SlideSnap.app/Contents/MacOS/SlideSnap
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SlideSnap
+          path: dist/SlideSnap.zip
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # A release made by hand for this tag only gets its zip replaced.
+        run: |
+          gh release upload "$GITHUB_REF_NAME" dist/SlideSnap.zip --clobber \
+            || gh release create "$GITHUB_REF_NAME" dist/SlideSnap.zip --title "SlideSnap $GITHUB_REF_NAME" --generate-notes
