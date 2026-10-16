@@ -1,0 +1,106 @@
+import Foundation
+
+/// Interface strings in Russian and English; the system language decides.
+enum L10n {
+    static let isRussian = Locale.preferredLanguages.first?.hasPrefix("ru") == true
+
+    static func t(_ key: String) -> String {
+        (isRussian ? ru[key] : en[key]) ?? en[key] ?? key
+    }
+
+    static func t(_ key: String, _ args: CVarArg...) -> String {
+        String(format: t(key), arguments: args)
+    }
+
+    static let en: [String: String] = [
+        "subtitle": "Photos of lecture slides → clean slides + text for notes",
+        "drop.title": "Drop slide photos, a folder or a PDF",
+        "drop.hint": "Shot from the projector at an angle — SlideSnap straightens them",
+        "choose": "Choose…",
+        "change": "Change…",
+        "clear": "Clear",
+        "inputs.summary": "%d photos / pages",
+        "transcript": "Lecture transcript",
+        "transcript.optional": "Optional: speech is attached to each slide",
+        "transcript.none": "Not added",
+        "transcript.bad": "Could not read the transcript: no time stamps found",
+        "output": "Save to",
+        "output.auto": "Next to the photos",
+        "settings": "Settings",
+        "aspect": "Slide shape",
+        "aspect.asis": "As shot",
+        "header": "Slides have a coloured title bar",
+        "header.help": "Widens the crop so the title bar and footer of the template are kept",
+        "language": "Text language",
+        "width": "Image width",
+        "run": "Process",
+        "cancel": "Cancel",
+        "progress": "Slide %d of %d",
+        "starting": "Opening files…",
+        "done": "Done: %d slides",
+        "done.skipped": "repeats dropped: %d",
+        "done.byTime": "speech matched by capture time",
+        "done.byText": "speech matched by text (no capture time)",
+        "failed": "Failed: %@",
+        "finder": "Show in Finder",
+        "openMd": "Open .md",
+        "copy": "Text for AI",
+        "copied": "Copied",
+        "copy.help": "slides.md: titles, slide text and speech — far fewer tokens than the images",
+        "empty.title": "Slides will appear here",
+        "empty.hint": "Each photo: find the slide → straighten → read the text → strip location data",
+        "notFound": "slide not found — whole frame",
+        "lang.ru": "Russian + English",
+        "lang.en": "English",
+        "lang.uk": "Ukrainian + English",
+        "lang.de": "German + English",
+        "lang.fr": "French + English",
+        "lang.es": "Spanish + English",
+    ]
+
+    static let ru: [String: String] = [
+        "subtitle": "Фото слайдов лекции → ровные слайды и текст для конспекта",
+        "drop.title": "Перетащите фото слайдов, папку или PDF",
+        "drop.hint": "Снято с проектора под углом — SlideSnap выровняет",
+        "choose": "Выбрать…",
+        "change": "Изменить…",
+        "clear": "Убрать",
+        "inputs.summary": "Фото / страниц: %d",
+        "transcript": "Транскрипт лекции",
+        "transcript.optional": "Необязательно: к каждому слайду добавится речь лектора",
+        "transcript.none": "Не добавлен",
+        "transcript.bad": "Не удалось прочитать транскрипт: нет меток времени",
+        "output": "Сохранить в",
+        "output.auto": "Рядом с фото",
+        "settings": "Настройки",
+        "aspect": "Формат слайда",
+        "aspect.asis": "Как снято",
+        "header": "У слайдов цветная шапка",
+        "header.help": "Расширяет обрезку, чтобы шапка с заголовком и подвал шаблона не срезались",
+        "language": "Язык текста",
+        "width": "Ширина картинок",
+        "run": "Обработать",
+        "cancel": "Отмена",
+        "progress": "Слайд %d из %d",
+        "starting": "Открываю файлы…",
+        "done": "Готово, слайдов: %d",
+        "done.skipped": "повторов убрано: %d",
+        "done.byTime": "речь привязана по времени съёмки",
+        "done.byText": "речь привязана по тексту (времени съёмки нет)",
+        "failed": "Ошибка: %@",
+        "finder": "В Finder",
+        "openMd": "Открыть .md",
+        "copy": "Текст для ИИ",
+        "copied": "Скопировано",
+        "copy.help": "slides.md: заголовки, текст слайдов и речь — в разы меньше токенов, чем картинки",
+        "empty.title": "Здесь появятся слайды",
+        "empty.hint": "Каждое фото: найти слайд → выровнять → распознать текст → убрать геоданные",
+        "notFound": "слайд не найден — весь кадр",
+        "lang.ru": "Русский + английский",
+        "lang.en": "Английский",
+        "lang.uk": "Украинский + английский",
+        "lang.de": "Немецкий + английский",
+        "lang.fr": "Французский + английский",
+        "lang.es": "Испанский + английский",
+    ]
+}
